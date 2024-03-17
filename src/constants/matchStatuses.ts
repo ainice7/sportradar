@@ -1,0 +1,6 @@
+enum MATCH_STATUSES {
+  STARTED = "STARTED",
+  IN_PROGRESS = "IN_PROGRESS",
+}
+
+export default MATCH_STATUSES;
