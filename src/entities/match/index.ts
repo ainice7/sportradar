@@ -1,9 +1,6 @@
 import ERRORS_NAMES from "../../constants/errors";
 import MATCH_STATUSES from "../../constants/matchStatuses";
-import IMatch, {
-  MatchStatus,
-  Team,
-} from "../../interfaces/match.interface";
+import IMatch, { MatchStatus, Team } from "../../interfaces/match.interface";
 import Announcer from "../announcer";
 
 export default class Match implements IMatch {
@@ -42,7 +39,7 @@ export default class Match implements IMatch {
       homeScore < this.homeTeam.score - 1 ||
       awayScore < this.awayTeam.score - 1
     ) {
-      throw new Error(ERRORS_NAMES.INCORRECT_SCORE);
+      throw new Error(ERRORS_NAMES.INCORRECT_VALUE);
     }
 
     this.homeTeam.score = homeScore;
@@ -60,9 +57,9 @@ export default class Match implements IMatch {
     this.status = MATCH_STATUSES.IN_PROGRESS;
 
     if (this.homeTeam.score === this.awayTeam.score) {
-      result = "Draw";
+      result = "Draw!";
     } else {
-      result = `${this.homeTeam.name} ${this.homeTeam.score} - ${this.awayTeam.name} ${this.awayTeam.score}`;
+      result = `${this.homeTeam.name} ${this.homeTeam.score} - ${this.awayTeam.name} ${this.awayTeam.score}.`;
     }
 
     return Announcer.matchFinished(result);
