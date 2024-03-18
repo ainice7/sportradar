@@ -1,7 +1,6 @@
 import ERRORS_NAMES from "../../constants/errors";
 import MATCH_STATUSES from "../../constants/matchStatuses";
 import IMatch, {
-  IMatchTeams,
   MatchStatus,
   Team,
 } from "../../interfaces/match.interface";
