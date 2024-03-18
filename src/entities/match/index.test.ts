@@ -79,7 +79,7 @@ describe("Match update test", () => {
     expect(match.homeTeam.score).toBe(6);
     expect(match.awayTeam.score).toBe(7);
     expect(match.score).toBe(13);
-    expect(() => match.updateMatch(6, 5)).toThrow(ERRORS_NAMES.INCORRECT_SCORE);
+    expect(() => match.updateMatch(6, 5)).toThrow(ERRORS_NAMES.INCORRECT_VALUE);
   });
 });
 
@@ -88,7 +88,7 @@ describe("Match finishing test", () => {
 
   test("Correct finish", () => {
     const match = new Match(teams);
-    const expectedResult = `${teams.homeTeamName} 1 - ${teams.awayTeamName} 0`;
+    const expectedResult = `${teams.homeTeamName} 1 - ${teams.awayTeamName} 0.`;
 
     match.startMatch();
     match.updateMatch(1, 0);
@@ -101,7 +101,7 @@ describe("Match finishing test", () => {
 
   test("Correct draw", () => {
     const match = new Match(teams);
-    const expectedResult = "Draw";
+    const expectedResult = "Draw!";
 
     match.startMatch();
     match.updateMatch(1, 1);
