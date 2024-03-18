@@ -112,3 +112,17 @@ describe("Match finishing test", () => {
     expect(match.status).toBe(MATCH_STATUSES.IN_PROGRESS);
   });
 });
+
+describe("Testing protected fields", () => {
+  const teams = { homeTeamName: "Clones", awayTeamName: "Jedis" };
+  const match = new Match(teams);
+
+  const protectedKeys = ["homeTeam", "awayTeam", "score", "time", "status"];
+
+  for (let key of protectedKeys) {
+    test(`${key} is protected`, () => {
+      //@ts-ignore
+      expect(() => (match[key] = 1)).toThrow(TypeError);
+    });
+  }
+});
