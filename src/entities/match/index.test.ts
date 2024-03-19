@@ -104,6 +104,14 @@ describe("Match update test", () => {
     expect(() => match.updateMatch({ homeScore: 6, awayScore: 5 })).toThrow(
       ERRORS_NAMES.INCORRECT_VALUE
     );
+    //@ts-ignore
+    expect(() => match.updateMatch({ homeScore: null, awayScore: 8 })).toThrow(
+      ERRORS_NAMES.INCORRECT_VALUE
+    );
+    expect(() =>
+      //@ts-ignore
+      match.updateMatch({ homeScore: 6, awayScore: undefined })
+    ).toThrow(ERRORS_NAMES.INCORRECT_VALUE);
 
     match.finishMatch();
     expect(() => match.updateMatch({ homeScore: 6, awayScore: 8 })).toThrow(

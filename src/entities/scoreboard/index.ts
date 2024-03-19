@@ -69,14 +69,14 @@ export default class Scoreboard {
     };
   }
 
-  updateMatch(id: string, scores: Score) {
+  updateMatch(id: string, score: Score) {
     const requiredMatch = this._scoreboard.get(id);
 
     if (!requiredMatch) {
       throw new Error(ERRORS_NAMES.NOT_FOUND);
     }
 
-    return requiredMatch.updateMatch(scores);
+    return requiredMatch.updateMatch(score);
   }
 
   finishMatch(id: string) {
