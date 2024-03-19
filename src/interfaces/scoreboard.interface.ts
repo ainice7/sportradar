@@ -1,1 +1,4 @@
-export default interface IScoreboard {}
+export type teamNames = {
+  homeTeamName: string;
+  awayTeamName: string;
+};

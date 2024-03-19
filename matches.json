@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1232",
+    "homeTeam": {
+      "name": "Afrika",
+      "score": 2
+    },
+    "awayTeam": {
+      "name": "Germany",
+      "score": 1
+    },
+    "score": 3,
+    "status": "STARTED",
+    "time": 1710787564296
+  },
+  {
+    "id": "0322",
+    "homeTeam": {
+      "name": "Italia",
+      "score": 0
+    },
+    "awayTeam": {
+      "name": "Spain",
+      "score": 0
+    },
+    "score": 0,
+    "status": "STARTED",
+    "time": 1710787689989
+  },
+  {
+    "id": "0287",
+    "homeTeam": {
+      "name": "France",
+      "score": 1
+    },
+    "awayTeam": {
+      "name": "Norway",
+      "score": 2
+    },
+    "score": 3,
+    "status": "IN_PROGRESS",
+    "time": 1710787778144
+  },
+  {
+    "id": "1398",
+    "homeTeam": {
+      "name": "Japan",
+      "score": 4
+    },
+    "awayTeam": {
+      "name": "China",
+      "score": 9
+    },
+    "score": 13,
+    "status": "IN_PROGRESS",
+    "time": 1710787800406
+  },
+  {
+    "id": "1314",
+    "homeTeam": {
+      "name": "USA",
+      "score": 6
+    },
+    "awayTeam": {
+      "name": "Canada",
+      "score": 7
+    },
+    "score": 13,
+    "status": "IN_PROGRESS",
+    "time": 1710801060022
+  }
+]

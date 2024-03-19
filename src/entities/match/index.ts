@@ -1,28 +1,38 @@
 import ERRORS_NAMES from "../../constants/errors";
 import MATCH_STATUSES from "../../constants/matchStatuses";
-import IMatch, { MatchStatus, Team } from "../../interfaces/match.interface";
+import IMatch, {
+  MatchStatus,
+  Score,
+  Team,
+} from "../../interfaces/match.interface";
 import Announcer from "../announcer";
 
-export default class Match implements IMatch {
+export default class Match {
+  private _id: string;
   private _homeTeam: Team;
   private _awayTeam: Team;
   private _score: number;
   private _time: number;
   private _status: MatchStatus;
 
-  constructor({ homeTeamName, awayTeamName }: Record<string, string>) {
-    if (homeTeamName === awayTeamName) {
+  constructor(match: IMatch) {
+    const { homeTeam, awayTeam } = match;
+
+    if (homeTeam.name === awayTeam.name) {
       throw new Error(ERRORS_NAMES.SAME_NAME);
     }
 
-    const score = 0;
-
-    this._homeTeam = { name: homeTeamName, score };
-    this._awayTeam = { name: awayTeamName, score };
-
-    return;
+    this._id = match?.id || Math.round(Math.random() * 10000).toString();
+    this._homeTeam = { ...homeTeam };
+    this._awayTeam = { ...awayTeam };
+    this._score = match?.score || 0;
+    this._time = match?.time || 0;
+    this._status = match?.status;
   }
 
+  get id() {
+    return this._id;
+  }
   get homeTeam() {
     return this._homeTeam;
   }
@@ -40,6 +50,10 @@ export default class Match implements IMatch {
   }
 
   startMatch(): string {
+    if (this._status) {
+      throw new Error(ERRORS_NAMES.MATCH_STARTED);
+    }
+
     this._time = Date.now();
     this._status = MATCH_STATUSES.STARTED;
 
@@ -49,8 +63,21 @@ export default class Match implements IMatch {
     });
   }
 
-  updateMatch(homeScore: number, awayScore: number): string {
-    //It allows to take 1 point, if the decission was worng
+  updateMatch(score: Score): string {
+    if (this._status === MATCH_STATUSES.IN_PROGRESS) {
+      throw new Error(ERRORS_NAMES.MATCH_FINISHED);
+    } else if (
+      !score.hasOwnProperty("homeScore") ||
+      !score.hasOwnProperty("awayScore")
+    ) {
+      throw new Error(ERRORS_NAMES.INCORRECT_VALUE);
+    } else if (!isFinite(score.homeScore) || !isFinite(score.awayScore)) {
+      throw new Error(ERRORS_NAMES.INCORRECT_VALUE);
+    }
+
+    const { homeScore, awayScore } = score;
+
+    //It allows to take 1 point, if the decission was wrong
     if (
       homeScore < this._homeTeam.score - 1 ||
       awayScore < this._awayTeam.score - 1
@@ -69,6 +96,10 @@ export default class Match implements IMatch {
   }
 
   finishMatch(): string {
+    if (this._status === MATCH_STATUSES.IN_PROGRESS) {
+      throw new Error(ERRORS_NAMES.MATCH_FINISHED);
+    }
+
     let result: string;
     this._status = MATCH_STATUSES.IN_PROGRESS;
 
