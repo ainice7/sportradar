@@ -13,7 +13,7 @@ export default class Match {
   private _awayTeam: Team;
   private _score: number;
   private _time: number;
-  private _status: MatchStatus;
+  private _status: MatchStatus | undefined;
 
   constructor(match: IMatch) {
     const { homeTeam, awayTeam } = match;

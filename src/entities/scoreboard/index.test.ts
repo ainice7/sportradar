@@ -60,8 +60,8 @@ describe("Match update", () => {
 
     newScoreboard.updateMatch("1232", { homeScore: 2, awayScore: 2 });
     const updatedMatch = newScoreboard.scoreboard.get("1232");
-    expect(updatedMatch.homeTeam.score).toBe(2);
-    expect(updatedMatch.awayTeam.score).toBe(2);
+    expect(updatedMatch?.homeTeam.score).toBe(2);
+    expect(updatedMatch?.awayTeam.score).toBe(2);
   });
 
   test("No updating when wrong id", () => {
@@ -99,10 +99,10 @@ describe("Match finish", () => {
     expect(newScoreboard.summary.size).toBe(3);
 
     newScoreboard.finishMatch("1232");
-    expect(() => newScoreboard.scoreboard.get("1232").status).toThrow(
+    expect(() => newScoreboard.scoreboard.get("1232")!.status).toThrow(
       TypeError
     );
-    expect(newScoreboard.summary.get("1232").status).toBe(
+    expect(newScoreboard.summary.get("1232")?.status).toBe(
       MATCH_STATUSES.IN_PROGRESS
     );
     expect(newScoreboard.scoreboard.size).toBe(1);
